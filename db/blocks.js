@@ -140,6 +140,8 @@ var Queries = {
 
 	loadLastBlock: 'SELECT * FROM full_blocks_list WHERE "b_height" = (SELECT MAX("height") FROM blocks) ORDER BY "b_height", "t_rowId"',
 
+	loadLastNBlockIds: 'SELECT "id" FROM blocks ORDER BY "height" DESC LIMIT $1',
+
 	blockExists: new PQ('SELECT "id" FROM blocks WHERE "id" = $1'),
 
 	deleteAfterBlock: new PQ('DELETE FROM blocks WHERE "height" >= (SELECT "height" FROM blocks WHERE "id" = $1)')
@@ -191,6 +193,10 @@ BlocksRepo.prototype.loadBlocksOffset = function (offset, limit) {
 
 BlocksRepo.prototype.loadLastBlock = function () {
 	return this.db.query(Queries.loadLastBlock);
+};
+
+BlocksRepo.prototype.loadLastNBlockIds = function (limit) {
+	return this.db.query(Queries.loadLastNBlockIds, [limit]);
 };
 
 BlocksRepo.prototype.blockExists = function (id) {
