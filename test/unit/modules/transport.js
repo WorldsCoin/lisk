@@ -24,8 +24,8 @@ var TransportModule = rewire('../../../modules/transport.js');
 describe('transport', function () {
 
 	var dbStub, loggerStub, busStub, schemaStub, networkStub, balancesSequenceStub,
-		transactionStub, blockStub, peersStub, broadcasterStubRef, transportInstance,
-		library, __private, defaultScope;
+	    transactionStub, blockStub, peersStub, broadcasterStubRef, transportInstance,
+	    library, __private, defaultScope;
 
 	var restoreRewiredTopDeps;
 
@@ -148,8 +148,7 @@ describe('transport', function () {
 		});
 
 		afterEach(function (done) {
-			// Reset __private and library module variables to their
-			// original states.
+			// Reset __private and library module variables to their original states.
 			Object.keys(libraryOriginal).forEach(function (field) {
 				library[field] = libraryOriginal[field];
 			});
